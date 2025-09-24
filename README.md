@@ -15,3 +15,5 @@
 - Header Completed (with svg logo & nav items)
 - Streaming Completed (with StreamingImage & Login form)
 - Login form completed
+- Create user/Login user using local storage
+- Routing configuration done
