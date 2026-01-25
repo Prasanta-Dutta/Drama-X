@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import { auth } from "../utils/firebase.config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { useFormValidation } from "../utils/useFormValidation";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 export const Login = () => {
     const [isLogIn, setIsLogIn] = useState(true);
@@ -9,6 +12,9 @@ export const Login = () => {
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     const classNameList = {
         inputClassName: "border-2 border-slate-700 rounded-sm p-2 bg-slate-800 text-white",
@@ -37,8 +43,16 @@ export const Login = () => {
         if (!isLogIn) {
             createUserWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
                 .then((userInfo) => {
-                    const user = userInfo.user;
-                    console.log(user);
+                    updateProfile(auth.currentUser, {
+                        displayName: name?.current?.value
+                    }).then(() => {
+                        const {uid, email, displayName} = auth.currentUser;
+                        console.log(uid, email, displayName);
+                        dispatch(addUser({uid, email, displayName}));
+                        navigate("/browse");
+                    }).catch((error) => {
+                        console.log(error.message);
+                    });
                 })
                 .catch((error) => {
                     console.log("Error " + error.code + " " + error.message);
@@ -49,12 +63,22 @@ export const Login = () => {
             signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
                 .then((userInfo) => {
                     const user = userInfo.user;
+                    const safeUser = {
+                        uid: user.uid,
+                        email: user.email,
+                        displayName: user.displayName,
+                        photoURL: user.photoURL,
+                    };
                     console.log(user);
+                    dispatch(addUser(safeUser));
+                    navigate("/browse");
                 })
                 .catch((error) => {
                     setErrorMessage("Error " + error.code + " " + error.message);
                 });
         }
+
+        return;
     };
 
     return (
@@ -92,7 +116,7 @@ export const Login = () => {
                     </div>
                     <div className="flex my-2 mb-4">
                         <input type="checkbox" className="" />
-                        <div className="text-sm text-white font-bold mx-5">Remind ME</div>
+                        <div className="text-sm text-white font-bold mx-5">Remind Me</div>
                     </div>
                     <div className="flex my-2 justify-center text-white">
                         {isLogIn ? "Don't have an account? " : "Already have an account? "} &nbsp;
