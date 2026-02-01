@@ -1,16 +1,22 @@
+import { useSelector } from 'react-redux';
+import BackgroundMovieDetails from './BackgroundMovieDetails'
+import BackgroundMovieVideo from './BackgroundMovieVideo'
+
 const PlayingMovieContainer = () => {
-    return(
-        <div className="">
-            <iframe 
-                className="w-screen h-screen pointer-events-none"
-                src="https://www.youtube.com/embed/V0Fqdb-smqo?autoplay=1&mute=1&loop=1&playlist=V0Fqdb-smqo&controls=0&modestbranding=1&rel=0&playsinline=1"
-                title="YouTube video player"
-                allow="autoplay; encrypted-media;" 
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen>
-            </iframe>
+    const movies = useSelector((store) => store?.movie?.nowPlayingMovies);
+    if(!movies || movies.length === 0) return null;
+
+    const backgroundMovie = movies[0];
+    const movieId = backgroundMovie.id;
+    const title = backgroundMovie?.original_title;
+    const overview = backgroundMovie?.overview;
+
+    return (
+        <div>
+            <BackgroundMovieVideo movieId={movieId} />
+            <BackgroundMovieDetails title={title} overview={overview} />
         </div>
     )
-};
+}
 
 export default PlayingMovieContainer;

@@ -27,16 +27,17 @@ const appRouter = createBrowserRouter([
                 path: "/contact",
                 element: <Contact />,
             },
-            {
-                path: "/browse",
-                element:
-                    <ProtectedBrowseRoute>
-                        <Browse />
-                    </ProtectedBrowseRoute>
-            }
+
         ],
         errorElement: <Error />
     },
+    {
+        path: "/browse",
+        element:
+            <ProtectedBrowseRoute>
+                <Browse />
+            </ProtectedBrowseRoute>
+    }
 ]);
 
 export default appRouter;

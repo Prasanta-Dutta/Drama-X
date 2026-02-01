@@ -2,7 +2,7 @@ import MovieListContainer from "./MovieListContainer";
 import PlayingMovieContainer from "./PlayingMovieContainer";
 
 const MovieContainer = () => {
-    return(
+    return (
         <div>
             <PlayingMovieContainer />
             <MovieListContainer />

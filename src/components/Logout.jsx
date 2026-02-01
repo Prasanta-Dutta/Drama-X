@@ -21,7 +21,7 @@ const Logout = () => {
     }
 
     return (
-        <div>
+        <div className="flex items-center mx-6">
             <div
                 className="text-xl text-white font-medium cursor-pointer px-4 py-2 rounded-md bg-slate-700"
                 onClick={handleLogout}

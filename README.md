@@ -17,3 +17,22 @@
 - Login form completed
 - Create user/Login user using local storage
 - Routing configuration done
+
+
+
+
+- Component Flow for Browse
+    - Browse
+        - Browse Header
+
+        - Movie Container
+
+            - Playing Movie Container
+                - Background Movie Video
+                - Background Movie Details
+
+            - Movie List Container
+                - Movie List
+                    - Movie Card
+
+        - Movie Footer
