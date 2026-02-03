@@ -23,7 +23,7 @@ const Logout = () => {
     return (
         <div className="flex items-center mx-6">
             <div
-                className="text-xl text-white font-medium cursor-pointer px-4 py-2 rounded-md bg-slate-700"
+                className="text-xl text-white font-medium cursor-pointer px-4 py-2 rounded-md bg-rose-600 hover:bg-rose-700"
                 onClick={handleLogout}
             >
                 Logout

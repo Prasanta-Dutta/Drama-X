@@ -1,14 +1,27 @@
+import { useEffect, useRef } from "react";
 import useFetchMovieVideos from "../hooks/useFetchMovieVideos";
 import { PLAYING_MOVIE_URL_END, PLAYING_MOVIE_URL_START } from "../utils/constant";
 
 const BackgroundMovieVideo = ({movieId}) => {
     const movieKey = useFetchMovieVideos(movieId);
+    const iframeRef = useRef(null);
+
+    useEffect(() => {
+        return () => {
+            if(iframeRef.current){
+                iframeRef.current.src = "";
+            }
+        }
+    }, []);
+
+    if(!movieKey)   return;
     
     return(
         <div className="w-full aspect-video absolute z-0">
             <iframe 
+                ref={iframeRef}
                 className="w-full aspect-video pointer-events-none"
-                src={PLAYING_MOVIE_URL_START + movieKey?.toString() + PLAYING_MOVIE_URL_END}
+                src={PLAYING_MOVIE_URL_START + movieKey?.toString() + PLAYING_MOVIE_URL_END.replace("VIDEO_ID", movieKey.toString())}
                 title="YouTube video player"
                 allow="autoplay; encrypted-media;" 
                 referrerPolicy="strict-origin-when-cross-origin"

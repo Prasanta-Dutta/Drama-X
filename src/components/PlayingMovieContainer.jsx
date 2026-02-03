@@ -6,7 +6,7 @@ const PlayingMovieContainer = () => {
     const movies = useSelector((store) => store?.movie?.nowPlayingMovies);
     if(!movies || movies.length === 0) return null;
 
-    const backgroundMovie = movies[0];
+    const backgroundMovie = movies[3];
     const movieId = backgroundMovie.id;
     const title = backgroundMovie?.original_title;
     const overview = backgroundMovie?.overview;

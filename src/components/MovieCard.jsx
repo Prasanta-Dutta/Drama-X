@@ -6,6 +6,7 @@ const MovieCard = ({ movie }) => {
             <img
                 src={IMAGE_POSTER_PATH_URL + movie.poster_path}
                 title={movie.title}
+                alt="Movie poster path"
             />
             <h1 className="text-white text-lg p-2">{movie.title}</h1>
         </div>

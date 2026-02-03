@@ -2,7 +2,7 @@ export const MOVIE_FETCH_URL = 'https://api.themoviedb.org/3/movie/now_playing?p
 export const VIDEO_URL = 'https://api.themoviedb.org/3/movie/movie_id/videos';
 
 export const PLAYING_MOVIE_URL_START = "https://www.youtube.com/embed/";
-export const PLAYING_MOVIE_URL_END = "?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1";
+export const PLAYING_MOVIE_URL_END = "?autoplay=1&mute=1&controls=0&loop=1&playlist=VIDEO_ID&modestbranding=1&rel=0&playsinline=1";
 
 export const NOW_PLAYING_MOVIE_URL = 'https://api.themoviedb.org/3/movie/now_playing?page=1';
 
