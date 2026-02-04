@@ -4,10 +4,12 @@ const gptSlice = createSlice({
     name: "gpt",
     initialState: {
         gptShowingStatus: false,
+        gptSearchMovieNames: null,
         gptSearchResult: null,
+        gptPreviousSearchMovieNames: null,
         gptPreviousSearchResult: null,
     },
-    reducers:{
+    reducers: {
         toggleGptShowingStatus: (state) => {
             state.gptShowingStatus = !state.gptShowingStatus;
         },
@@ -17,16 +19,37 @@ const gptSlice = createSlice({
         addGptPreviousSearchResult: (state, action) => {
             state.gptPreviousSearchResult = action.payload;
         },
+        addGptSearchMovieNames: (state, action) => {
+            state.gptSearchMovieNames = action.payload;
+        },
+        addGptPreviousSearchMovieNames: (state, action) => {
+            state.gptPreviousSearchMovieNames = action.payload;
+        },
         removeGptSearchResult: (state) => {
             state.gptSearchResult = null;
+        },
+        removeGptSearchMovieNames: (state) => {
+            state.gptSearchMovieNames = null;
+        },
+        swapCurrentMoviesToPreviousMovies: (state) => {
+            if (state.gptSearchMovieNames !== null && state.gptSearchResult !== null) {
+                state.gptPreviousSearchMovieNames = state.gptSearchMovieNames;
+                state.gptPreviousSearchResult = state.gptSearchResult;
+                state.gptSearchMovieNames = null;
+                state.gptSearchResult = null;
+            }
         }
     }
 });
 
-export const { 
-    toggleGptShowingStatus, 
-    addGptSearchResult, 
+export const {
+    toggleGptShowingStatus,
+    addGptSearchResult,
     addGptPreviousSearchResult,
-    removeGptSearchResult 
+    addGptSearchMovieNames,
+    addGptPreviousSearchMovieNames,
+    swapCurrentMoviesToPreviousMovies,
+    removeGptSearchResult,
+    removeGptSearchMovieNames,
 } = gptSlice.actions;
 export default gptSlice.reducer;

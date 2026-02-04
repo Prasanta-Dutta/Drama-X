@@ -36,3 +36,18 @@
                     - Movie Card
 
         - Movie Footer
+
+
+1. GptSlice added
+2. SearchGpt component build including SearchBar and SearchResult Component
+3. AI Integration done.
+4. SearchBar component call gemini api and then provide movie name. Then added to redux store as searchResult and previousSearchResult
+5. On SearchBar cleanup function added for clearing searchResult from redux store while unmounting.
+6. Some cleanup function introduces for BackgroundMovie conmonent for stoping the video while unmounting.
+7. Toggle functionality built between Home Button and GPT Search Button.
+
+8. SearchBar component build.
+9. Fetch movie using normal js fn not using custom hook.
+10. Learn about Unmount logic without dependency array.
+11. Swap Reducer function with condition for safe unmounting.
+12. Build SearchResult component.

@@ -10,6 +10,8 @@ export const MOVIE_IMAGE_URL = "https://api.themoviedb.org/3/movie/{movie_id}/im
 
 export const IMAGE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w300";
 
+export const SEARCH_BY_MOVIE_URL = "https://api.themoviedb.org/3/search/movie?query=movie_name&page=1";
+
 export const OPTIONS = {
     method: 'GET',
     headers: {
