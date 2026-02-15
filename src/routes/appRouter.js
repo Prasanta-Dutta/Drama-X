@@ -4,8 +4,10 @@ import { ProtectedHomeRoute, ProtectedBrowseRoute } from "./projectedRoutes";
 import { About } from "../pages/About";
 import { Contact } from "../pages/Contact";
 import { Body } from "../components/Body";
-import { Browse } from "../components/Browse";
 import { Error } from "../pages/Error";
+import { lazy, Suspense } from "react";
+
+const Browse = lazy(() => import("../components/Browse"));
 
 const appRouter = createBrowserRouter([
     {
@@ -34,9 +36,11 @@ const appRouter = createBrowserRouter([
     {
         path: "/browse",
         element:
-            <ProtectedBrowseRoute>
-                <Browse />
-            </ProtectedBrowseRoute>
+            <Suspense fallback={<div className="text-white">Loading...</div>}>
+                <ProtectedBrowseRoute>
+                    <Browse />
+                </ProtectedBrowseRoute>
+            </Suspense>
     }
 ]);
 

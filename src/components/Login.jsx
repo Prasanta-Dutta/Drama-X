@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth } from "../utils/firebase.config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useFormValidation } from "../utils/useFormValidation";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 export const Login = () => {
+    console.log("render");
     const [isLogIn, setIsLogIn] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
     const name = useRef(null);
@@ -46,9 +47,9 @@ export const Login = () => {
                     updateProfile(auth.currentUser, {
                         displayName: name?.current?.value
                     }).then(() => {
-                        const {uid, email, displayName} = auth.currentUser;
+                        const { uid, email, displayName } = auth.currentUser;
                         console.log(uid, email, displayName);
-                        dispatch(addUser({uid, email, displayName}));
+                        dispatch(addUser({ uid, email, displayName }));
                         navigate("/browse");
                     }).catch((error) => {
                         console.log(error.message);
@@ -81,9 +82,18 @@ export const Login = () => {
         return;
     };
 
+    useEffect(() => {
+        return () => {
+            setErrorMessage(null);
+            if (name.current) name.current.value = "";
+            if (email.current) email.current.value = "";
+            if (password.current) password.current.value = "";
+        }
+    }, [isLogIn]);
+
     return (
         <div className="h-screen w-screen absolute z-20 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="p-10 bg-black bg-opacity-85 w-1/4 rounded-lg">
+            <div className="p-10 bg-black bg-opacity-85 sm:w-full md:w-1/4 rounded-lg">
                 <form onSubmit={handleSubmit} className="flex flex-col">
                     <div className="text-3xl text-white font-bold my-4">
                         {isLogIn ? "Sign in" : "Sign up"}
@@ -113,10 +123,6 @@ export const Login = () => {
                         >
                             Submit
                         </button>
-                    </div>
-                    <div className="flex my-2 mb-4">
-                        <input type="checkbox" className="" />
-                        <div className="text-sm text-white font-bold mx-5">Remind Me</div>
                     </div>
                     <div className="flex my-2 justify-center text-white">
                         {isLogIn ? "Don't have an account? " : "Already have an account? "} &nbsp;

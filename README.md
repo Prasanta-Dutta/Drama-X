@@ -51,3 +51,10 @@
 10. Learn about Unmount logic without dependency array.
 11. Swap Reducer function with condition for safe unmounting.
 12. Build SearchResult component.
+
+13. In SearchBar component use form to make the search bar so that it handle both cases when user press enter and click on the search button for all it will call handle search.
+14. Implement lazy loading bor <Browse /> component.
+
+
+# Some Fixes
+    - Login page -> On errorMessage toggle features and input box clear on state change through cleanup fn.

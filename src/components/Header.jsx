@@ -5,9 +5,9 @@ export const Header = () => {
     return (
         <div className="flex justify-center">
             <div className="flex justify-center absolute z-30 my-2">
-                <div className="flex my-4 rounded-xl bg-gradient-to-r from-slate-700 to-slate-900">
+                <div className="flex md:my-4 rounded-xl bg-gradient-to-r from-slate-700 to-slate-900">
                     <Logo2 />
-                    <Navbar />
+                    {/* <Navbar /> */}
                 </div>
             </div>
         </div>
